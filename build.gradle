@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+// Get latest tag or fallback to commit hash
+def gitTag = 'git describe --tags --abbrev=0'.execute().text.trim()
+def gitCommit = 'git rev-parse --short HEAD'.execute().text.trim()
+
+version = gitTag ? gitTag : gitCommit
+println "Building version $version"
+
+group = 'com.github.systeminvecklare'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+    withSourcesJar()
+    withJavadocJar()
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //testImplementation 'junit:junit:4.13.2'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release.set(8)  // target Java 8
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}

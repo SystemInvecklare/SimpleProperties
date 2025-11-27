@@ -1,0 +1,2 @@
+gradle=8.4
+java=8::https://github.com/adoptium/temurin8-binaries/releases/download/jdk8u472-b08/OpenJDK8U-jdk_${arch}_${os}_hotspot_8u472b08.zip
