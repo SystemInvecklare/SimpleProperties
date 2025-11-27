@@ -25,11 +25,8 @@ java -jar GradleRage.jar "%GRADLE_VERSION%" "%JAVA_VERSION%"
 @echo off
 SET DIR=%~dp0
 SET DIR=%DIR:~0,-1%
-SET JAVA_BIN=%DIR%\gradle\gradle-8.4\java\bin\java.exe
-SET GRADLE_LAUNCHER=%DIR%\gradle\gradle-8.4\lib\gradle-launcher-8.4.jar
-"%JAVA_BIN%" -jar "%GRADLE_LAUNCHER%" %*
 
-:: Launch gradle...
+:: Generate wrapper so jitpack can build
 
 :: Read paths.properties
 SET JAVA_BIN=
@@ -56,4 +53,7 @@ IF NOT DEFINED GRADLE_JAR (
 SET JAVA_BIN=%JAVA_BIN%/java.exe
 
 :: Run Gradle with all passed arguments
-"%JAVA_BIN%" -jar "%GRADLE_JAR%" %*
+"%JAVA_BIN%" -jar "%GRADLE_JAR%" wrapper --gradle-version %GRADLE_VERSION%
+
+:: Launch gradle wrapper with all passed arguments
+.\gradlew.bat %*
