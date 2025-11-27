@@ -53,7 +53,7 @@ IF NOT DEFINED GRADLE_JAR (
 SET JAVA_BIN=%JAVA_BIN%/java.exe
 
 :: Run Gradle with all passed arguments
-"%JAVA_BIN%" -jar "%GRADLE_JAR%" wrapper --gradle-version %GRADLE_VERSION%
+"%JAVA_BIN%" -jar "%GRADLE_JAR%" wrapper --no-daemon --gradle-version %GRADLE_VERSION%
 
 :: Launch gradle wrapper with all passed arguments
 .\gradlew.bat %*
